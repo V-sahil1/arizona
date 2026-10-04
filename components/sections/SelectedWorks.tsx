@@ -25,9 +25,8 @@ export default function SelectedWorks() {
     const state = flipState.current;
     if (!state) return;
     flipState.current = null;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     Flip.from(state, {
-      duration: reduce ? 0 : 0.9,
+      duration: 0.9,
       ease: "power3.inOut",
       absolute: true,
       stagger: 0.04,
@@ -86,7 +85,7 @@ export default function SelectedWorks() {
                   className={`relative mb-4 overflow-hidden bg-surface ${filter === "all" ? p.aspect : "aspect-[16/11]"}`}
                 >
                   <Img src={p.image} alt={p.alt} className="transition-transform duration-700 ease-out group-hover:scale-105" />
-                  <div className="absolute inset-0 flex items-center justify-center bg-primary/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div className="absolute inset-0 flex items-center justify-center bg-primary/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-active:opacity-100">
                     <span className="bg-surface-bright/95 px-5 py-3 text-label-sm tracking-widest text-primary uppercase shadow-md">
                       View Case File
                     </span>

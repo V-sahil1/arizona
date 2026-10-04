@@ -10,7 +10,7 @@ export default function Vignettes() {
           <div className="flex items-center gap-3">
             <Icon name="photo_camera" className="text-xl text-secondary" />
             <span className="text-label-sm font-semibold tracking-widest text-primary uppercase">
-              Studio Vignettes · @ateliervanya
+              Studio Vignettes · @arizona.interiors
             </span>
           </div>
           <a
@@ -30,7 +30,7 @@ export default function Vignettes() {
               className={`group relative aspect-square overflow-hidden bg-surface-container ${i === 3 ? "hidden md:block" : ""}`}
             >
               <Img src={v.image} alt={v.label} className="transition-transform duration-500 group-hover:scale-105" />
-              <div className="absolute inset-0 flex items-center justify-center bg-primary/30 text-center text-label-sm tracking-widest text-on-primary uppercase opacity-0 transition-opacity group-hover:opacity-100">
+              <div className="absolute inset-0 flex items-center justify-center bg-primary/30 text-center text-label-sm tracking-widest text-on-primary uppercase opacity-0 transition-opacity group-hover:opacity-100 group-active:opacity-100">
                 {v.label}
               </div>
             </div>

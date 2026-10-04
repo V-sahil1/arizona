@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const index = [
   { href: "/works", label: "Selected Works" },
-  { href: "/studio", label: "The Atelier" },
+  { href: "/studio", label: "The Studio" },
   { href: "/services", label: "Practice & Disciplines" },
   { href: "/process", label: "Artisanal Methodology" },
   { href: "/materiality", label: "Material Spec Archive" },
@@ -112,7 +112,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-outline-variant/30 pt-space-md text-on-surface-variant/80 md:flex-row">
           <p className="text-center text-body-sm md:text-left">
-            © 2026 Atelier Vanya Architecture &amp; Spatial Studio. All rights reserved.
+            © 2026 Arizona Interior / Exterior Company. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6">
             {["Legal & Provenance", "Client Portal", "Privacy Statement"].map((s) => (

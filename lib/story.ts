@@ -12,27 +12,8 @@ const all = <T extends Element = HTMLElement>(scope: ParentNode, sel: string) =>
 export function initStory(root: HTMLElement, desktop: boolean) {
   all(root, "[data-story-blueprint]").forEach((el) => blueprintStory(el, desktop));
   all(root, "[data-story-manifesto]").forEach((el) => manifesto(el, desktop));
-  all(root, "[data-story-day]").forEach((el) => dayOfLight(el, desktop));
+  all(root, "[data-story-day]").forEach((el) => dayOfLight(el));
   storyRail(root);
-}
-
-/** Static, fully-revealed versions of each chapter for people who prefer reduced motion. */
-export function storyReduced(root: HTMLElement) {
-  all(root, "[data-story-blueprint]").forEach((el) => {
-    gsap.set(all(el, "[data-plan]"), { strokeDashoffset: 0 });
-    gsap.set(all(el, "[data-bs-photo]"), { clipPath: "inset(0% 0% 0% 0%)" });
-    gsap.set(all(el, "[data-bs-plan]"), { opacity: 0 });
-    gsap.set(all(el, "[data-bs-tag], [data-bs-warm]"), { opacity: 1 });
-    gsap.set(all(el, "[data-bs-step]"), { gridArea: "auto", marginBottom: 24 });
-    all(el, "[data-bs-count]").forEach((c) => (c.textContent = "04"));
-  });
-  all(root, "[data-story-day]").forEach((el) => {
-    gsap.set(all(el, "[data-day-track]"), { flexDirection: "column", width: "100%", height: "auto" });
-    all(el, "[data-day-panel]").forEach((p) =>
-      gsap.set(p, { width: "100%", height: "auto", backgroundColor: p.dataset.bg, color: p.dataset.fg }),
-    );
-    gsap.set(all(el, "[data-sun], [data-sun-halo]"), { autoAlpha: 0 });
-  });
 }
 
 /* ------------------------------------------------------------------ */
@@ -135,35 +116,16 @@ function manifesto(el: HTMLElement, desktop: boolean) {
 /* ------------------------------------------------------------------ */
 /* Chapter: A Day of Light                                              */
 /* ------------------------------------------------------------------ */
-function dayOfLight(el: HTMLElement, desktop: boolean) {
+function dayOfLight(el: HTMLElement) {
   const track = el.querySelector<HTMLElement>("[data-day-track]");
   const panels = all(el, "[data-day-panel]");
   const canvas = el.querySelector<HTMLElement>("[data-day-canvas]");
   if (!track || !canvas || !panels.length) return;
   gsap.set(canvas, { "--day-bg": panels[0].dataset.bg, "--day-fg": panels[0].dataset.fg });
 
-  if (!desktop) {
-    // Mobile: the palette shifts with each hour as panels pass through the viewport
-    const paint = (d: DOMStringMap) => gsap.to(canvas, { "--day-bg": d.bg, "--day-fg": d.fg, duration: 0.9, overwrite: "auto" });
-    panels.forEach((p, i) => {
-      ScrollTrigger.create({
-        trigger: p,
-        start: "top 60%",
-        onEnter: () => paint(p.dataset),
-        onLeaveBack: () => paint(panels[Math.max(0, i - 1)].dataset),
-      });
-      gsap.from(p.querySelector("[data-day-text]"), {
-        autoAlpha: 0,
-        y: 40,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: { trigger: p, start: "top 70%", once: true },
-      });
-    });
-    return;
-  }
-
-  const distance = () => track.scrollWidth - window.innerWidth;
+  // same pinned sideways journey on every screen size
+  // layout width, not scrollWidth: captions waiting offscreen to slide in would otherwise overshoot the last hour
+  const distance = () => track.offsetWidth - window.innerWidth;
   const trigger = {
     trigger: el,
     start: "top top",

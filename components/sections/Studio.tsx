@@ -53,7 +53,7 @@ export default function Studio() {
               <blockquote className="font-serif text-headline-sm text-surface-bright italic">
                 “Every detail has a reason. If it does not serve peace of mind, it does not belong in the room.”
               </blockquote>
-              <p className="text-label-sm tracking-widest text-surface-variant uppercase">— Atelier Vanya Founding Principles</p>
+              <p className="text-label-sm tracking-widest text-surface-variant uppercase">— Arizona Founding Principles</p>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { gsap, ScrollTrigger, SplitText } from "./gsap";
-import { initStory, storyReduced } from "./story";
+import { initStory } from "./story";
 
 /**
  * Data-attribute driven animation system, themed on interior architecture:
@@ -27,25 +27,22 @@ import { initStory, storyReduced } from "./story";
 export function initAnimations(root: HTMLElement) {
   const mm = gsap.matchMedia();
 
+  // The full motion design plays on every device, including phones that request reduced motion
+  // (many Android battery savers switch that on silently), so the site looks the same everywhere.
   mm.add(
-    {
-      motion: "(prefers-reduced-motion: no-preference)",
-      reduce: "(prefers-reduced-motion: reduce)",
-      desktop: "(min-width: 768px)",
-    },
+    // one of these always matches; matchMedia only runs the setup while at least one condition is true
+    { desktop: "(min-width: 768px)", mobile: "(max-width: 767.98px)" },
     (ctx) => {
       const q = <T extends Element = HTMLElement>(sel: string) => Array.from(root.querySelectorAll<T & HTMLElement>(sel));
 
-      if (ctx.conditions?.reduce) {
-        gsap.set(q("[data-anim-hide]"), { autoAlpha: 1 });
-        gsap.set(q("[data-curtain]"), { autoAlpha: 0 });
-        gsap.set(q("[data-bp]"), { strokeDashoffset: 0 });
-        gsap.set(q("[data-bp-wrap]"), { opacity: 0.3 });
-        // background films hold on their poster frame
-        q<HTMLVideoElement>("video[autoplay]").forEach((v) => v.pause());
-        storyReduced(root);
-        return;
-      }
+      // background films: some phones (e.g. iOS Low Power Mode) refuse autoplay; retry on the first touch or scroll
+      q<HTMLVideoElement>("video[autoplay]").forEach((v) => {
+        v.play().catch(() => {
+          const go = () => v.play().catch(() => {});
+          window.addEventListener("touchstart", go, { once: true, passive: true });
+          window.addEventListener("scroll", go, { once: true, passive: true });
+        });
+      });
 
       // pinned story chapters first, so later triggers account for their pin spacing
       initStory(root, Boolean(ctx.conditions?.desktop));

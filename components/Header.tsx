@@ -16,7 +16,6 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.from(headerRef.current, { yPercent: -100, duration: 1.1, ease: "power3.out", delay: 0.1 });
   });
 
@@ -39,12 +38,12 @@ export default function Header() {
         <div className="flex h-20 w-full items-center justify-between px-5 md:px-8 lg:h-24 lg:px-margin">
           <Link href="/" aria-label="Arizona Interior/Exterior Company — Home" className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={LOGO_MARK} alt="" className="h-11 w-auto lg:h-14" />
+            <img src={LOGO_MARK} alt="" className="h-10 w-auto sm:h-11 lg:h-14" />
             <span className="flex flex-col">
               <span className="font-serif text-[19px] leading-7 whitespace-nowrap tracking-[0.12em] text-primary sm:text-headline-sm">
                 ARIZONA
               </span>
-              <span className="text-label-sm tracking-widest text-on-surface-variant uppercase">
+              <span className="text-label-sm whitespace-nowrap tracking-widest text-on-surface-variant uppercase">
                 <span className="md:hidden">Interior / Exterior</span>
                 <span className="hidden md:inline">Interior / Exterior Company</span>
               </span>
@@ -90,9 +89,6 @@ export default function Header() {
             </Link>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={IMAGES.avatar} alt="Profile" className="hidden h-8 w-8 rounded-full object-cover md:block" />
-            <span className="hidden h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary min-[380px]:flex md:hidden">
-              <Icon name="person" className="text-[18px] text-on-primary" />
-            </span>
             <button
               type="button"
               aria-label="Open navigation menu"

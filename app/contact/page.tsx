@@ -12,13 +12,13 @@ const studios = [
     name: "Ahmedabad Flagship",
     coords: "23.0225° N, 72.5714° E",
     lines: ["42 Bodakdev Sanctuary Road", "Ahmedabad, Gujarat 380054"],
-    email: "ahmedabad@ateliervanya.com",
+    email: "ahmedabad@arizonainteriors.com",
   },
   {
     name: "Mumbai Studio",
     coords: "19.0760° N, 72.8777° E",
     lines: ["Kala Ghoda Heritage Loft 4B", "Fort, Mumbai 400001"],
-    email: "mumbai@ateliervanya.com",
+    email: "mumbai@arizonainteriors.com",
   },
 ];
 

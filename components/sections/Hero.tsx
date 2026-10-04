@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       data-hero
-      className={`relative -mt-20 flex min-h-[660px] w-full flex-col justify-end overflow-hidden bg-primary pt-28 pb-12 text-on-primary md:justify-between md:pb-10 lg:-mt-24 lg:min-h-[942px] lg:pt-32 ${gutters}`}
+      className={`relative -mt-20 flex min-h-[max(660px,100svh)] w-full flex-col justify-end overflow-hidden bg-primary pt-28 pb-12 text-on-primary md:justify-between md:pb-10 lg:-mt-24 lg:min-h-[942px] lg:pt-32 ${gutters}`}
     >
       <div className="absolute inset-0 z-0">
         {/* Silent background film; the living-salon still shows while it loads.
@@ -36,7 +36,6 @@ export default function Hero() {
       <div data-hero-item data-anim-hide className="relative z-10 hidden w-full items-center justify-between pb-6 md:flex">
         <span data-hero-line className="absolute inset-x-0 bottom-0 h-px bg-outline-variant/20" />
         <div className="flex items-center gap-3">
-          <span className="inline-block h-2 w-2 rounded-full bg-secondary" />
           <span className="text-label-sm tracking-[0.2em] text-surface-variant uppercase">
             Interior Architecture &amp; Bespoke Spatial Practice · Est. 2018
           </span>
@@ -52,7 +51,6 @@ export default function Hero() {
 
       <div data-hero-content className="relative z-10 max-w-5xl md:py-12 lg:py-20">
         <div data-hero-item data-anim-hide className="mb-3 inline-flex items-center gap-2 md:hidden">
-          <span className="h-2 w-2 rounded-full bg-secondary-fixed" />
           <span className="text-label-sm tracking-[0.2em] text-secondary-fixed uppercase">
             Interior Architecture &amp; Design Studio
           </span>

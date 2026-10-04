@@ -19,8 +19,8 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "Atelier Vanya — Interior Architecture & Spatial Design",
-    template: "%s · Atelier Vanya",
+    default: "Arizona — Interior / Exterior Company",
+    template: "%s · Arizona",
   },
   description:
     "Considered interior architecture where geological materiality, silent proportions, deep light, and everyday Indian life converge into enduring calm.",
