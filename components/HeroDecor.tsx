@@ -91,15 +91,3 @@ export function PlanSvg({
     </svg>
   );
 }
-
-/** Architect's floor plan drafted over the drapes before they open. */
-export function Blueprint() {
-  return (
-    <div
-      data-bp-wrap
-      className="pointer-events-none absolute top-24 right-5 w-[78vw] max-w-[620px] opacity-70 md:top-32 md:right-8 lg:top-[24%] lg:right-margin lg:w-[42vw] lg:opacity-100"
-    >
-      <PlanSvg />
-    </div>
-  );
-}

@@ -8,6 +8,8 @@ import Icon from "./Icon";
 import { getLenis } from "./SmoothScroll";
 import { IMAGES, navItems } from "@/lib/data";
 
+const LOGO_MARK = "/images/logo-mark.png";
+
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -35,13 +37,17 @@ export default function Header() {
     <>
       <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 bg-background/90 shadow-[0_1px_8px_rgba(0,0,0,0.03)] backdrop-blur-md">
         <div className="flex h-20 w-full items-center justify-between px-5 md:px-8 lg:h-24 lg:px-margin">
-          <Link href="/" className="flex flex-col">
-            <span className="font-serif text-[19px] leading-7 whitespace-nowrap tracking-tight text-primary sm:text-headline-sm">
-              ATELIER VANYA
-            </span>
-            <span className="text-label-sm tracking-widest text-on-surface-variant uppercase">
-              <span className="md:hidden">Interior Architecture</span>
-              <span className="hidden md:inline">Interior Architecture &amp; Spatial Design</span>
+          <Link href="/" aria-label="Arizona Interior/Exterior Company — Home" className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={LOGO_MARK} alt="" className="h-11 w-auto lg:h-14" />
+            <span className="flex flex-col">
+              <span className="font-serif text-[19px] leading-7 whitespace-nowrap tracking-[0.12em] text-primary sm:text-headline-sm">
+                ARIZONA
+              </span>
+              <span className="text-label-sm tracking-widest text-on-surface-variant uppercase">
+                <span className="md:hidden">Interior / Exterior</span>
+                <span className="hidden md:inline">Interior / Exterior Company</span>
+              </span>
             </span>
           </Link>
 
@@ -109,9 +115,13 @@ export default function Header() {
         inert={!open}
       >
         <div className="flex h-20 items-center justify-between px-5 md:px-8">
-          <div className="flex flex-col">
-            <span className="font-serif text-headline-sm tracking-wider text-primary uppercase">Atelier Vanya</span>
-            <span className="text-label-sm tracking-[0.16em] text-secondary uppercase">Portfolio &amp; Atelier</span>
+          <div className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={LOGO_MARK} alt="" className="h-11 w-auto" />
+            <div className="flex flex-col">
+              <span className="font-serif text-headline-sm tracking-wider text-primary uppercase">Arizona</span>
+              <span className="text-label-sm tracking-[0.16em] text-secondary uppercase">Interior / Exterior Company</span>
+            </div>
           </div>
           <button
             type="button"

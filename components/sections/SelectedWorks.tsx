@@ -5,7 +5,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import Icon from "../Icon";
 import { Img, Kicker, SectionTitle, gutters, sectionY } from "../ui";
 import { Flip, ScrollTrigger, gsap } from "@/lib/gsap";
-import { filters, projects, type Category } from "@/lib/data";
+import { filters, gallery, projects, type Category } from "@/lib/data";
 
 type FlipState = ReturnType<typeof Flip.getState>;
 
@@ -105,6 +105,28 @@ export default function SelectedWorks() {
                   <span className="shrink-0 text-label-sm tracking-widest text-outline uppercase">{p.tag}</span>
                 </div>
               </Link>
+            );
+          })}
+          {gallery.map((g) => {
+            const visible = filter === "all" || g.category === filter;
+            return (
+              <figure
+                key={g.image}
+                data-card
+                data-flip-id={g.image}
+                className={`group flex-col ${visible ? "flex" : "hidden"} ${filter === "all" ? g.span : "md:col-span-6"}`}
+              >
+                <div
+                  data-panel="up"
+                  className={`relative mb-4 overflow-hidden bg-surface ${filter === "all" ? g.aspect : "aspect-[16/11]"}`}
+                >
+                  <Img src={g.image} alt={g.alt} className="transition-transform duration-700 ease-out group-hover:scale-105" />
+                </div>
+                <figcaption className="flex items-baseline justify-between gap-4 pt-2">
+                  <h3 className="font-serif text-headline-sm text-primary">{g.title}</h3>
+                  <span className="shrink-0 text-label-sm tracking-widest text-outline uppercase">{g.tag}</span>
+                </figcaption>
+              </figure>
             );
           })}
         </div>

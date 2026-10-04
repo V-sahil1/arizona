@@ -22,7 +22,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-gutter pb-space-lg md:grid-cols-2 lg:grid-cols-12">
           <div className="flex flex-col justify-between lg:col-span-4">
             <div className="space-y-4">
-              <h3 className="font-serif text-headline-sm text-primary">ATELIER VANYA</h3>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/logo-full.png" alt="Arizona Interior/Exterior Company" className="h-40 w-auto" />
               <p className="max-w-sm text-body-sm leading-relaxed text-on-surface-variant">
                 An architectural interior monograph practice engaging spatial rhythm, unpolished natural limestone,
                 hand-troweled slaked lime, and patinated brass elements.

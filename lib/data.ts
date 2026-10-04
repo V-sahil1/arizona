@@ -173,6 +173,93 @@ export const projects: Project[] = [
   },
 ];
 
+export type GalleryItem = {
+  image: string;
+  alt: string;
+  title: string;
+  category: Category;
+  tag: string;
+  /** desktop grid span + image aspect, continuing the projects grid below the case files */
+  span: string;
+  aspect: string;
+};
+
+/** Studio photographs and renders shown alongside the case files in Selected Works. */
+export const gallery: GalleryItem[] = [
+  {
+    image: "/images/623300658_18053229458452294_3111213358015965888_n.webp",
+    alt: "Open living room with grey sectional sofa, backlit marble TV wall, fluted timber panels and a ring chandelier",
+    title: "Living Room",
+    category: "residential",
+    tag: "Residential",
+    span: "md:col-span-6",
+    aspect: "aspect-[16/9]",
+  },
+  {
+    image: "/images/649686690_17900201490244152_6027450473975709598_n.webp",
+    alt: "Master bedroom with rust upholstered bed, arched wall panels, walnut wardrobe and sheer linen curtains",
+    title: "Master Bedroom",
+    category: "residential",
+    tag: "Residential",
+    span: "md:col-span-6",
+    aspect: "aspect-[16/9]",
+  },
+  {
+    image: "/images/464057715_17858327319269618_8257504718237011461_n.webp",
+    alt: "Executive cabin with backlit marble shelving, fluted wall panels and a sculptural ribbon pendant light",
+    title: "Executive Cabin",
+    category: "commercial",
+    tag: "Workspace",
+    span: "md:col-span-4",
+    aspect: "aspect-square",
+  },
+  {
+    image: "/images/655220048_17968065239882171_2028109791229071092_n.webp",
+    alt: "Office cabin with grey leather high-back chairs, linear pendant light and framed ginkgo artwork",
+    title: "Office Cabin",
+    category: "commercial",
+    tag: "Workspace",
+    span: "md:col-span-4",
+    aspect: "aspect-square",
+  },
+  {
+    image: "/images/656334767_18096828154816384_572890411755261853_n.webp",
+    alt: "Completed office cabin with walnut desk, linear pendant and glazed partition",
+    title: "Office Cabin — Completed",
+    category: "commercial",
+    tag: "Workspace",
+    span: "md:col-span-4",
+    aspect: "aspect-square",
+  },
+  {
+    image: "/images/654559456_18155571460451906_3356182601869622489_n.webp",
+    alt: "Bedroom with upholstered bed, walnut and ivory wardrobes, oval backlit mirror and ink-wash artwork",
+    title: "Bedroom Suite",
+    category: "residential",
+    tag: "Residential",
+    span: "md:col-span-4",
+    aspect: "aspect-[16/9]",
+  },
+  {
+    image: "/images/655240718_18097015480957553_2738899952263484484_n.webp",
+    alt: "Bedroom with sculpted ivory wall panels, brass-framed mirror, circular wall niche and rust bench",
+    title: "Guest Bedroom",
+    category: "residential",
+    tag: "Residential",
+    span: "md:col-span-4",
+    aspect: "aspect-[16/9]",
+  },
+  {
+    image: "/images/656718220_18084904868249140_1304101562768950972_n.webp",
+    alt: "Twin bedroom with relief-panelled ivory wall, upholstered single beds and monochrome artwork",
+    title: "Twin Bedroom",
+    category: "residential",
+    tag: "Residential",
+    span: "md:col-span-4",
+    aspect: "aspect-[16/9]",
+  },
+];
+
 export const filters: { key: "all" | Category; label: string }[] = [
   { key: "all", label: "All Works (18)" },
   { key: "residential", label: "Residential" },

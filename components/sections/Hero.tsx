@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Icon from "../Icon";
 import { gutters } from "../ui";
-import { Blueprint, Curtains, Sunbeam } from "../HeroDecor";
+import { Curtains, Sunbeam } from "../HeroDecor";
 import { IMAGES } from "@/lib/data";
 
 export default function Hero() {
@@ -11,11 +11,12 @@ export default function Hero() {
       className={`relative -mt-20 flex min-h-[660px] w-full flex-col justify-end overflow-hidden bg-primary pt-28 pb-12 text-on-primary md:justify-between md:pb-10 lg:-mt-24 lg:min-h-[942px] lg:pt-32 ${gutters}`}
     >
       <div className="absolute inset-0 z-0">
-        {/* Silent background film; the living-salon still shows while it loads */}
+        {/* Silent background film; the living-salon still shows while it loads.
+            Anchored top-left and slightly enlarged so the generator's watermark in the bottom-right corner is cropped off. */}
         <video
           data-hero-img
-          className="h-full w-full scale-105 object-cover object-center opacity-70"
-          src="/images/mp4.mp4"
+          className="h-full w-full origin-top-left scale-110 object-cover object-left-top"
+          src="/images/bg.mp4"
           poster={IMAGES.livingSalon}
           autoPlay
           muted
@@ -24,10 +25,11 @@ export default function Hero() {
           preload="auto"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-primary/30" />
+        {/* Light scrims: just enough behind the type (left and bottom) to keep it legible, the film stays clear */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-primary/15 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
         <Sunbeam />
         <Curtains />
-        <Blueprint />
       </div>
 
       {/* Top kicker bar */}
