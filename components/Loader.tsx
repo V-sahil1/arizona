@@ -5,6 +5,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { reveal } from "@/lib/intro";
 import { getLenis } from "./SmoothScroll";
 import { IMAGES } from "@/lib/data";
+import { createDust } from "@/lib/three/dust";
 
 const BRAND = "ARIZONA";
 
@@ -31,6 +32,10 @@ export default function Loader() {
       requestAnimationFrame(() => getLenis()?.stop());
       if (headerLogo) gsap.set(headerLogo, { opacity: 0 });
 
+      // brass dust hanging in the dark, drawn in through the doorway as it opens
+      const dust = createDust(el.querySelector<HTMLElement>("[data-l-dust]")!, { count: 750, size: 30, opacity: 0, alwaysRender: true });
+      const dustU = dust?.uniforms;
+
       const loaded = new Promise<void>((resolve) => {
         if (document.readyState === "complete") resolve();
         else window.addEventListener("load", () => resolve(), { once: true });
@@ -53,6 +58,7 @@ export default function Loader() {
           },
         }, 0.2)
         .fromTo($("[data-l-bar]"), { scaleX: 0 }, { scaleX: 1, duration: 1.9, ease: "power2.inOut" }, 0.2);
+      if (dustU) intro.to(dustU.uOpacity, { value: 0.9, duration: 2, ease: "power1.inOut" }, 0);
 
       Promise.all([loaded, intro.then()]).then(() => open());
 
@@ -68,6 +74,8 @@ export default function Loader() {
           .fromTo($("[data-l-img]"), { scale: 1.3 }, { scale: 1, duration: 2.4, ease: "power2.out" }, 1.45)
           .from($("[data-l-char]"), { yPercent: 110, duration: 1, stagger: 0.06, ease: "power4.out" }, 1.85)
           .from($("[data-l-tag]"), { autoAlpha: 0, y: 12, duration: 0.8, ease: "power2.out" }, 2.4);
+        // the doors swinging open stir the air
+        if (dustU) tl.to(dustU.uWarp, { value: 0.25, duration: 1.4, ease: "power2.out" }, 1.45).to(dustU.uWarp, { value: 0.08, duration: 1.4, ease: "sine.inOut" }, 2.85);
 
         // 3. The doorway opens onto the site; the monogram takes its seat in the header
         const exitAt = 3.6;
@@ -77,6 +85,9 @@ export default function Loader() {
           .to($("[data-l-ring]"), { scale: 1.6, autoAlpha: 0, transformOrigin: "50% 100%", duration: 1, ease: "power2.in" }, exitAt)
           .to($("[data-l-bg]"), { autoAlpha: 0, duration: 0.9, ease: "power1.inOut" }, exitAt + 0.5)
           .to($("[data-l-arch]"), { autoAlpha: 0, duration: 0.7, ease: "power1.inOut" }, exitAt + 0.8);
+        if (dustU) {
+          tl.to(dustU.uWarp, { value: 1.3, duration: 1.4, ease: "power2.in" }, exitAt).to(dustU.uOpacity, { value: 0, duration: 0.6, ease: "power1.in" }, exitAt + 0.9);
+        }
 
         if (headerLogo) {
           // follow the header live: it is still sliding in while the monogram flies
@@ -106,6 +117,8 @@ export default function Loader() {
         getLenis()?.start();
         setDone(true);
       }
+
+      return () => dust?.dispose();
     },
     { scope: root },
   );
@@ -160,6 +173,9 @@ export default function Loader() {
         <div data-l-door="l" className="door absolute inset-y-0 left-0 w-1/2 origin-left" />
         <div data-l-door="r" className="door absolute inset-y-0 right-0 w-1/2 origin-right" />
       </div>
+
+      {/* WebGL brass dust (Three.js) */}
+      <div data-l-dust className="absolute inset-0" />
 
       {/* the monogram — later flies to the header */}
       <div

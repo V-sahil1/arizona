@@ -2,6 +2,7 @@ import Link from "next/link";
 import Icon from "../Icon";
 import { gutters } from "../ui";
 import { Curtains, Sunbeam } from "../HeroDecor";
+import HeroDust from "../three/HeroDust";
 import { IMAGES } from "@/lib/data";
 
 export default function Hero() {
@@ -29,6 +30,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-primary/15 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
         <Sunbeam />
+        <HeroDust />
         <Curtains />
       </div>
 

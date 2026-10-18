@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Icon from "../Icon";
 import { Img, Kicker, SectionTitle, gutters, sectionY } from "../ui";
 import { Flip, ScrollTrigger, gsap } from "@/lib/gsap";
 import { filters, gallery, projects, type Category } from "@/lib/data";
+import { attachRipple } from "@/lib/three/ripple";
 
 type FlipState = ReturnType<typeof Flip.getState>;
 
@@ -35,6 +36,9 @@ export default function SelectedWorks() {
       onComplete: () => ScrollTrigger.refresh(),
     });
   }, [filter]);
+
+  // WebGL liquid ripple on the photographs (desktop pointers)
+  useEffect(() => attachRipple(gridRef.current!, "[data-ripple]"), []);
 
   return (
     <section id="selected-works" className={`w-full scroll-mt-24 bg-surface-container-low ${gutters} ${sectionY}`}>
@@ -81,6 +85,7 @@ export default function SelectedWorks() {
                 className={`group flex-col ${visible ? "flex" : "hidden"} ${filter === "all" ? p.span : "md:col-span-6"}`}
               >
                 <div
+                  data-ripple
                   data-panel={p.span.includes("col-span-4") || p.span.includes("col-span-5") ? "up" : "left"}
                   className={`relative mb-4 overflow-hidden bg-surface ${filter === "all" ? p.aspect : "aspect-[16/11]"}`}
                 >
@@ -116,6 +121,7 @@ export default function SelectedWorks() {
                 className={`group flex-col ${visible ? "flex" : "hidden"} ${filter === "all" ? g.span : "md:col-span-6"}`}
               >
                 <div
+                  data-ripple
                   data-panel="up"
                   className={`relative mb-4 overflow-hidden bg-surface ${filter === "all" ? g.aspect : "aspect-[16/11]"}`}
                 >

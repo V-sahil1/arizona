@@ -2,6 +2,7 @@ import Link from "next/link";
 import Icon from "../Icon";
 import { Img, Kicker, SectionTitle, gutters, sectionY } from "../ui";
 import { materials } from "@/lib/data";
+import MaterialBoard from "../three/MaterialBoard";
 
 export default function Materiality() {
   return (
@@ -15,6 +16,8 @@ export default function Materiality() {
             Asian climate. We test, age, and curate every sample in our physical workshop.
           </p>
         </div>
+
+        <MaterialBoard samples={materials.map(({ code, title, right }) => ({ code, title, right }))} />
 
         <div data-tiles className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {materials.map((m) => (
