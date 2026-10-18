@@ -2,6 +2,7 @@
 
 import { gsap, ScrollTrigger, SplitText } from "./gsap";
 import { initStory } from "./story";
+import { onReveal } from "./intro";
 
 /**
  * Data-attribute driven animation system, themed on interior architecture:
@@ -301,7 +302,9 @@ function heroIntro(hero: HTMLElement, ctx: gsap.Context) {
   const $ = (sel: string) => Array.from(hero.querySelectorAll<HTMLElement>(sel));
   const blueprint = $("[data-bp]");
   const openAt = blueprint.length ? 1.2 : 0.15;
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" }, paused: true });
+  // hold the intro until the loading screen has opened onto the page
+  ctx.add(() => onReveal(() => tl.play()));
 
   // 1. The architect's plan is drafted over the closed drapes
   if (blueprint.length) {

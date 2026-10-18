@@ -7,6 +7,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import Icon from "./Icon";
 import { getLenis } from "./SmoothScroll";
 import { IMAGES, navItems } from "@/lib/data";
+import { onReveal } from "@/lib/intro";
 
 const LOGO_MARK = "/images/logo-mark.png";
 
@@ -15,8 +16,10 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
+  // the header slides in as the loading screen opens, ready to receive the flying monogram
   useGSAP(() => {
-    gsap.from(headerRef.current, { yPercent: -100, duration: 1.1, ease: "power3.out", delay: 0.1 });
+    gsap.set(headerRef.current, { yPercent: -100 });
+    return onReveal(() => gsap.to(headerRef.current, { yPercent: 0, duration: 1.1, ease: "power3.out", delay: 0.1 }));
   });
 
   useEffect(() => setOpen(false), [pathname]);
@@ -38,7 +41,7 @@ export default function Header() {
         <div className="flex h-20 w-full items-center justify-between px-5 md:px-8 lg:h-24 lg:px-margin">
           <Link href="/" aria-label="Arizona Interior/Exterior Company — Home" className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={LOGO_MARK} alt="" className="h-10 w-auto sm:h-11 lg:h-14" />
+            <img data-header-logo src={LOGO_MARK} alt="" className="h-10 w-auto sm:h-11 lg:h-14" />
             <span className="flex flex-col">
               <span className="font-serif text-[19px] leading-7 whitespace-nowrap tracking-[0.12em] text-primary sm:text-headline-sm">
                 ARIZONA

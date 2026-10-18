@@ -118,6 +118,40 @@
   will-change: transform;
 }
 
+/* Loader door leaves: dark timber with an inset brass-lined panel */
+.door {
+  background-color: var(--color-primary);
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0px, rgba(0, 0, 0, 0.18) 3px, rgba(255, 255, 255, 0.03) 7px),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.35));
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.door::before {
+  content: "";
+  position: absolute;
+  inset: 22% 14% 6%;
+  border: 1px solid rgba(223, 195, 144, 0.22);
+}
+.door::after {
+  content: "";
+  position: absolute;
+  top: 58%;
+  width: 2px;
+  height: 36px;
+  background: var(--color-secondary-fixed-dim);
+  opacity: 0.7;
+}
+.door[data-l-door="l"] {
+  box-shadow: inset -1px 0 0 rgba(223, 195, 144, 0.25);
+}
+.door[data-l-door="l"]::after {
+  right: 8%;
+}
+.door[data-l-door="r"]::after {
+  left: 8%;
+}
+
 /* Drafting paper: a faint 24px construction grid */
 .drafting-paper {
   background-color: var(--color-surface-container-low);
